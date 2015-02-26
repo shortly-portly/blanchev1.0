@@ -1,0 +1,41 @@
+<template name="newAppraisalForm">
+  <h1>New Appraisal Form</h1>
+  <div class="row">
+    <div class="col-sm-12">
+      {{> flashMessages}}
+      <form role="form">
+        <div class="form-group">
+          <label for="formTitle">Title</label>
+          <input type="text" class="form-control" name="title" placeholder="Enter Title">
+        </div>
+
+        <fieldset>
+          <legend>Questions</legend>
+          <a class="newTextArea" href='#'>Text Area</a>
+          <a class="newWords" href='#'>Words</a>
+          <a class="newRadar" href="#">Radar</a>
+        </fieldset>
+
+        {{#each tQuestions}}
+        <div class="container">
+          <div class="question">
+            {{> Template.dynamic template=typed}}
+          </div>
+          <div class="row">
+            <div class="col-sm12 text-right">
+              <a class="delete" href='#'>Delete!</a>
+            </div>
+          </div>
+
+        </div>
+          {{/each}}
+
+
+          <button type="submit" class="saveAppraisalForm btn btn-default">Create</button>
+          <button type="submit" class="publishAppraisalForm btn btn-default">Publish</button>
+      </form>
+
+      </div>
+    </div>
+
+</template>

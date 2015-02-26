@@ -1,0 +1,28 @@
+<template name="radio">
+  <div class="question">
+    <div class="row">
+      <div class="col-sm-1">
+        {{question}}
+      </div>
+      <div class="col-sm-10">
+        {{{text}}}
+        <p></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-1">
+      </div>
+      {{#each options}}
+      <div class="col-sm-2">
+        <label>
+          <input type="radio" {{disabled}} name="{{radioName}}" value="{{optionName}}" checked={{isActive optionName}}>{{text}}
+        </label>
+      </div>
+      {{/each}}
+    </div>
+
+
+  </div>
+
+</template>

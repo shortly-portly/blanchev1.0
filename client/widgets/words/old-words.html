@@ -1,0 +1,33 @@
+<template name="old-words">
+  <div class="question">
+    <div class="row">
+      <div class="col-sm-1">
+        {{questionNo}}
+      </div>
+      <div class="col-sm-10">
+        {{{text}}}
+        <p></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <table class="table table-striped table-bordered">
+          <tr>
+            <td><input {{mode}} type="text" class="form-control" name="Q{{questionNo}}w0" placeholder="1." value={{value questionNo 0}}></td>
+            <td><input {{mode}} type="text" class="form-control" name="Q{{questionNo}}w1" placeholder="2." value={{value questionNo 1}}></td>
+          </tr>
+          <tr>
+            <td><input {{mode}} type="text" class="form-control" name="Q{{questionNo}}w2" placeholder="3." value={{value questionNo 2}}></td>
+            <td><input {{mode}} type="text" class="form-control" name="Q{{questionNo}}w3" placeholder="4." value={{value questionNo 3}}></td>
+          </tr>
+          <tr>
+            <td><input {{attributes 5}}></td>
+            <td><input {{mode}} type="text" class="form-control" name="Q{{questionNo}}w4" placeholder="5." value={{value questionNo 4}}></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</template>
