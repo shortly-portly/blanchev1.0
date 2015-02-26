@@ -60,6 +60,9 @@ var createReview = function(user) {
 
 
 
+
+
+
       Template.newUser.events({
         'click .createUser': function(evt, template) {
           event.preventDefault();
