@@ -1,12 +1,11 @@
 Template.slide.rendered = function() {
 
-  var name = this.data.name;
   var answer = Reviews.findOne({_id: Session.get('reviewId')});
 
-  var selector = "." + name;
+  var selector = "." + 'Q' + this.data.questionNo;
 
   $(selector).noUiSlider({
-    start: [ answer.data[name] ],
+    start: [ answer.data[this.data.questionNo] ],
     range: {
       'min': [  0 ],
       'max': [ 100 ]
@@ -18,3 +17,9 @@ Template.slide.rendered = function() {
   }
 
 };
+
+Template.slide.helpers({
+  name: function() {
+    return 'Q' + this.questionNo;
+  }
+});

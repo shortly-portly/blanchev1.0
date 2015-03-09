@@ -1,12 +1,21 @@
 Template.textArea.helpers({
-  value: function(questionNo) {
-    var answer = Reviews.findOne({_id: Session.get('reviewId')});
-    console.log("Review Id is...." + Session.get('reviewId'));
-    return answer.data[questionNo];
-  },
-  mode: function() {
-    if (Session.get('mode') == 'view') {
-      return 'readonly';
+    attributes: function() {
+
+      var answer = Reviews.findOne({
+        _id: Session.get('reviewId')
+     });
+
+      if (Session.get('mode') == 'view') {
+        var mode = 'readonly'
+      };
+
+      return {
+        readonly: mode,
+        class: "form-control",
+        name: "Q" + this.questionNo,
+        rows: "5",
+        value: answer.data[this.questionNo]
+      }
+
     }
-  }
 });

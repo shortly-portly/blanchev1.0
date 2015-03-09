@@ -1,3 +1,5 @@
+
+
 Template.editor.rendered = function() {
 
   var selector = "editor" + this.data.questionNo;
@@ -7,7 +9,7 @@ Template.editor.rendered = function() {
     // Define the toolbar groups as it is a more accessible solution.
     toolbar:  [
       { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo' ] },
-      '/',
+
       { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript' ] },
       { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent' ] },
       { name: 'insert', items: [  'Table', 'HorizontalRule', ] },
@@ -17,7 +19,7 @@ Template.editor.rendered = function() {
     ],
 
     // Toolbar groups configuration.
-    toolbarGroups:  [
+  /*  toolbarGroups:  [
       { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
       { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
       { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
@@ -33,10 +35,13 @@ Template.editor.rendered = function() {
       { name: 'tools' },
       { name: 'others' },
       { name: 'about' }
-    ]
+    ] */
   }
   );
+  CKEDITOR.config.skin = "office2013";
+  CKEDITOR.config.removePlugins = 'elementspath';
+  CKEDITOR.config.resize_enabled = false;
 
-  console.log(CKEDITOR.configtoolbarGroups);
+  console.log(this);
 
 }

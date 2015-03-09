@@ -13,7 +13,7 @@ var collectDataFns = {
     return description;
   },
   slide: function(template, data) {
-    return $('.' + data.name).val();
+    return $('.Q' + data.questionNo).val();
   },
   radio: function(template, data) {
     var selector = "input[name=" + data.name + "]:checked";
@@ -71,8 +71,7 @@ Template.editPerformance.events ({
 });
 
 Template.editPerformance.created = function() {
-  console.log("This.data.review...");
-  console.log(this.data);
+
   Session.set("reviewId", this.data.review._id);
   Session.set("mode", "edit");
 

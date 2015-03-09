@@ -18,3 +18,16 @@
 input[type="radio"]{
   margin: 0 10px 0 10px;
 }
+
+.card {
+  background: white;
+  border: solid;
+  /* border-radius: 25px; */
+  border-width: 1px;
+  margin-top: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding: .5em;
+  padding-bottom: 1em;
+  box-shadow: 10px 10px 5px #888888;
+}

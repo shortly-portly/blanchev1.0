@@ -4,8 +4,16 @@ Template.radio.helpers({
     var answer = Reviews.findOne({_id: Session.get('reviewId')});
 
     var name = Template.parentData(1).name;
+    console.log("radio name is....");
+    console.log(name);
 
-    if (value == answer.data[name]) {
+    console.log("value is...");
+    console.log(value);
+
+    console.log("anwer..");
+    console.log(answer.data[name]);
+
+    if (value == answer.data[Template.parentData(1).questionNo]) {
       return true;
     } else {
       return false;
@@ -21,6 +29,7 @@ Template.radio.helpers({
     }
   },
   radioName: function() {
+    console.log(Template.parentData(1).questionNo);
     return Template.parentData(1).name;
   }
 });

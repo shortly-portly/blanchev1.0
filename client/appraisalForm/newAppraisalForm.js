@@ -74,15 +74,21 @@ Template.newAppraisalForm.events({
     })
   },
 
-  'click .newTextArea': function(evt, template) {
+  'click .standard': function(evt, template) {
     Meteor.appraisalHelpers.newQuestion('textArea');
   },
 
-  'click .newWords': function(evt, template) {
+  'click .words': function(evt, template) {
     Meteor.appraisalHelpers.newQuestion('words');
   },
-  'click .newRadar': function(evt, template) {
+  'click .radar': function(evt, template) {
     Meteor.appraisalHelpers.newQuestion('radar');
+  },
+  'click .radio': function(evt, template) {
+    Meteor.appraisalHelpers.newQuestion('radio');
+  },
+  'click .slide': function(evt, template) {
+    Meteor.appraisalHelpers.newQuestion('slide');
   },
 
   'click .delete': function() {
@@ -113,4 +119,6 @@ Template.newAppraisalForm.created = function() {
   console.log("settng question no bac to 1");
   tempQuestions.remove({});
   Session.set("questionNo", 1);
+  Meteor.appraisalHelpers.newQuestion('textArea');
+
 };

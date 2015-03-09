@@ -1,5 +1,7 @@
 <template name="textArea">
+
   <div class="question">
+
     <div class="row">
       <div class="col-sm-1">
         {{questionNo}}
@@ -12,8 +14,9 @@
 
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
-        <textarea {{mode}} class="{{name}} form-control" name=Q{{questionNo}} rows="5" value={{value questionNo}}></textarea>
+        <textarea {{attributes}}></textarea>
       </div>
     </div>
   </div>
+
 </template>

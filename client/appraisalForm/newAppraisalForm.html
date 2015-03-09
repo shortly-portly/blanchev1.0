@@ -8,34 +8,44 @@
           <label for="formTitle">Title</label>
           <input type="text" class="form-control" name="title" placeholder="Enter Title">
         </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            New Question <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="slide" href="#">Slide</a>
+            </li>
 
-        <fieldset>
-          <legend>Questions</legend>
-          <a class="newTextArea" href='#'>Text Area</a>
-          <a class="newWords" href='#'>Words</a>
-          <a class="newRadar" href="#">Radar</a>
-        </fieldset>
+            <li><a class="standard" href="#">Standard</a>
+            </li>
+            <li><a class="words" href="#">Words</a>
+            </li>
+            <li><a class="radar" href="#">Radar</a>
+            </li>
+            <li><a class="radio" href="#">Radio</a>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <p></p>
 
         {{#each tQuestions}}
         <div class="container">
-          <div class="question">
+          <div class="row card">
             {{> Template.dynamic template=typed}}
           </div>
-          <div class="row">
-            <div class="col-sm12 text-right">
-              <a class="delete" href='#'>Delete!</a>
-            </div>
-          </div>
-
         </div>
-          {{/each}}
+        {{/each}}
 
-
-          <button type="submit" class="saveAppraisalForm btn btn-default">Create</button>
-          <button type="submit" class="publishAppraisalForm btn btn-default">Publish</button>
+        <div class="form-group">
+        <button type="submit" class="saveAppraisalForm btn btn-default">Create</button>
+        <button type="submit" class="publishAppraisalForm btn btn-default">Publish</button>
+      </div>
       </form>
 
-      </div>
     </div>
+  </div>
 
 </template>
