@@ -41,6 +41,7 @@ Template.editor.rendered = function() {
   CKEDITOR.config.skin = "office2013";
   CKEDITOR.config.removePlugins = 'elementspath';
   CKEDITOR.config.resize_enabled = false;
+  CKEDITOR.config.height = 100;
 
   console.log(this);
 

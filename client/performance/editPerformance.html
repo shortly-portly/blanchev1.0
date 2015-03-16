@@ -1,17 +1,19 @@
 <template name="editPerformance">
-  <h1>Performance 2</h1>
+  <h1>{{title}}</h1>
   {{> flashMessages}}
 
   {{#each questions}}
-    <div class="container">
+    <div class="container card">
       {{> Template.dynamic template=type}}
   </div>
   {{/each}}
 
-    <div class="col-sm-12 col-sm-offset-1">
+  <div class="row bottom-btns">
+    <div class="col-sm-12">
       <button type="submit" class="saveReview btn btn-default">Save</button>
       <button type="submit" class="submitReview btn btn-default">Submit</button>
     </div>
+  </div>
 
 
 

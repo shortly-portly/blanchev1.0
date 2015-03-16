@@ -44,7 +44,12 @@ var collectData = function(template) {
     return data;
 };
 
-
+Template.editPerformance.helpers({
+  title: function() {
+    console.log(this);
+    return Appraisals.findOne(review.appraisal).title;
+  }
+})
 Template.editPerformance.events ({
   'click .saveReview': function(evt, template) {
     evt.preventDefault();

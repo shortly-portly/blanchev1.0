@@ -1,4 +1,3 @@
-
 var createAppraisalForm = function(evt, template, status) {
   var id;
   var errors = [];
@@ -33,26 +32,77 @@ var createAppraisalForm = function(evt, template, status) {
 
   Session.set('questions', []);
 
-  Router.go('editAppraisalForm', {
-    _id: id
-  });
-
   return id;
 
 }
 
 
+var updateAppraisalForm = function(evt, template, id, status) {
+
+  var errors = [];
+  event.preventDefault();
+
+  questions = Meteor.appraisalHelpers.collectQuestions(template);
+
+  errors = Meteor.appraisalHelpers.validateQuestions(questions);
+
+  title = template.find("input[name=title]").value;
+
+  if (!title) {
+    errors.push("Please Enter a Title");
+
+  }
+
+  if (errors.length > 0) {
+    FlashMessages.sendError(errors);
+    return
+  };
+
+  Meteor.appraisalHelpers.updateQuestions(id, questions);
+
+
+  /* For now assume that we created the Appraisal form ok */
+  /* TODO: need to check form was created succesfully */
+
+  Appraisals.update(id, {
+    $set: {
+      "title": title,
+      "status": status
+    }
+  });
+
+  Router.go('listAppraisals');
+
+}
+
 
 Template.newAppraisalForm.events({
   'click .saveAppraisalForm': function(evt, template) {
 
-    createAppraisalForm(evt, template, "created");
+    if (this.mode == "new") {
+      createAppraisalForm(evt, template, "created");
+    } else {
+      updateAppraisalForm(evt, template, this.appraisalForm._id, "created");
+    }
+
+
 
   },
   'click .publishAppraisalForm': function(evt, template) {
 
     var id;
-    id = createAppraisalForm(evt, template, 'published');
+
+    if (this.mode == "new") {
+      id = createAppraisalForm(evt, template, "created");
+    } else {
+
+      id = this.appraisalForm._id;
+
+
+      updateAppraisalForm(evt, template, id, "created");
+    }
+
+
 
     var data = [];
 
@@ -75,19 +125,25 @@ Template.newAppraisalForm.events({
   },
 
   'click .standard': function(evt, template) {
+    evt.preventDefault();
     Meteor.appraisalHelpers.newQuestion('textArea');
   },
 
   'click .words': function(evt, template) {
+    evt.preventDefault();
+    evt.stopPropagation();
     Meteor.appraisalHelpers.newQuestion('words');
   },
   'click .radar': function(evt, template) {
+    evt.preventDefault();
     Meteor.appraisalHelpers.newQuestion('radar');
   },
   'click .radio': function(evt, template) {
+    evt.preventDefault();
     Meteor.appraisalHelpers.newQuestion('radio');
   },
   'click .slide': function(evt, template) {
+    evt.preventDefault();
     Meteor.appraisalHelpers.newQuestion('slide');
   },
 
@@ -116,9 +172,31 @@ Template.newAppraisalForm.helpers({
 
 
 Template.newAppraisalForm.created = function() {
-  console.log("settng question no bac to 1");
+
   tempQuestions.remove({});
-  Session.set("questionNo", 1);
-  Meteor.appraisalHelpers.newQuestion('textArea');
+
+  var questionNo = 1;
+  console.log("new appraisal form called");
+
+  if (this.data.mode == "new") {
+    console.log("processing a new form");
+    Session.set("questionNo", 1);
+
+    Meteor.appraisalHelpers.newQuestion('textArea');
+
+  } else {
+    var questions = this.data.questions.fetch();
+
+    _.each(questions, function(question) {
+      tempQuestions.insert(question);
+      questionNo = questionNo + 1;
+    });
+
+    Session.set("questionNo", questionNo);
+
+  }
+
+
+
 
 };

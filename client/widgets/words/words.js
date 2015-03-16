@@ -7,9 +7,16 @@ Template.words.helpers({
       mode = true;
     };
 
+    var wibble = Session.get('reviewId');
+    console.log("review Id");
+    console.log(wibble);
+
     answer = Reviews.findOne({
       _id: Session.get('reviewId')
     });
+
+    console.log("words attributes...answer....");
+    console.log(answer);
 
 
     words = answer.data[this.questionNo];
@@ -18,7 +25,9 @@ Template.words.helpers({
       value = words[index];
     }
 
-    return {
+
+    var attr =
+    {
       type: "text",
       readonly: mode,
       class: "form-control",
@@ -26,6 +35,10 @@ Template.words.helpers({
       placeholder: index + 1,
       value: value
     }
+
+    console.log("attr...");
+    console.log(attr);
+    return attr;
 
 
   }

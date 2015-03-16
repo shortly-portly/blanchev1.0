@@ -1,20 +1,10 @@
 Template.radar.rendered = function() {
 
-  console.log("about to render radar");
-  console.log(this);
-  console.log(this.data);
-
   var name = this.data.name;
   var answer = Reviews.findOne({_id: Session.get('reviewId')});
-  console.log("answer");
-  console.log(answer);
-
-  /* var values = answer.data[name]; */
 
   var data = {
 
-    /* var answer = Reviews.findOne({user: Meteor.userId()});
-    var words = answer.data[name]; */
     labels: this.data.options,
     datasets: [
         {
@@ -47,16 +37,11 @@ Template.radar.rendered = function() {
   this.data.radar = myRadarChart;
 
 
-
-
-
-
 };
 
 
 Template.radar.events({
   'click': function(evt,template) {
-
 
 
   if (Session.get('mode') == 'edit') {

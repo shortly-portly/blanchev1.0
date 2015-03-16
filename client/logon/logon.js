@@ -1,6 +1,6 @@
 Template.logon.events({
   'click .logon': function(evt, template) {
-      event.preventDefault();
+      evt.preventDefault();
 
       var email = template.find("input[name=email]");
       var password = template.find("input[name=password]");

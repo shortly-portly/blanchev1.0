@@ -35,6 +35,8 @@ var updateAppraisalForm = function(evt, template, id, status) {
 }
 
 
+
+
 Template.editAppraisalForm.events({
   'click .newTextArea': function(evt, template) {
 

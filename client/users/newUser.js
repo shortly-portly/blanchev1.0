@@ -65,7 +65,7 @@ var createReview = function(user) {
 
       Template.newUser.events({
         'click .createUser': function(evt, template) {
-          event.preventDefault();
+          evt.preventDefault();
           var errors = [];
 
           data = {
@@ -81,6 +81,8 @@ var createReview = function(user) {
         var wibble = $('.newUser').data('bootstrapValidator');
         console.log("wibble is");
         console.log(wibble);
+        console.log("data is");
+        console.log(wibble.data);
         wibble.validate();
         if (!wibble.isValid()) {
           return
