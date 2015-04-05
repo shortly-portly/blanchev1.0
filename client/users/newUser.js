@@ -8,14 +8,12 @@ var validateUser = {
   fields: {
     email: {
       validators: {
-        notEmpty: {
-        }
+        notEmpty: {}
       }
     },
     password: {
       validators: {
-        notEmpty: {
-        }
+        notEmpty: {}
       }
     },
     firstName: {
@@ -27,98 +25,99 @@ var validateUser = {
     },
     surname: {
       validators: {
-        notEmpty: {
-        }
+        notEmpty: {}
       }
     }
   }
 }
 
 
-
 var createReview = function(user) {
 
-    var data = [];
-    Appraisals.find({status: 'published'}).forEach(function(appraisal) {
-        data = [];
+  console.log("Creating Review for ...");
+  console.log(user);
 
-        Questions.find({
-          appraisal: appraisal._id}).forEach(function(question) {
-            data[question.questionNo] = question.default;
-        });
+  var data = [];
+  Appraisals.find({
+    status: 'published'
+  }).forEach(function(appraisal) {
+    console.log("found an appraisal...");
+    data = [];
 
-        Reviews.insert({
-            user: user,
-            appraisal: appraisal._id,
-            data: data,
-            status: "open"
-        });
+    Questions.find({
+      appraisal: appraisal._id
+    }).forEach(function(question) {
+      data[question.questionNo] = question.default;
+    });
+
+    Reviews.insert({
+      user: user,
+      appraisal: appraisal._id,
+      data: data,
+      status: "open"
+    });
+  })
+};
+
+
+
+
+
+
+
+
+Template.newUser.events({
+  'click .createUser': function(evt, template) {
+    evt.preventDefault();
+    var errors = [];
+
+    data = {
+      email: template.find("input[name=email]").value,
+      password: template.find("input[name=password]").value,
+      profile: {
+        firstName: template.find("input[name=firstName]").value,
+        surname: template.find("input[name=surname]").value,
+        role: template.find("input[name=role]").checked
       }
-  )};
+    };
+
+    var wibble = $('.newUser').data('bootstrapValidator');
+
+    if (!wibble.isValid()) {
+      return
+    };
 
 
 
+    if (data.role) {
+      data.role = "admin";
+    } else {
+      data.role = "";
+    }
 
+    if (errors.length > 0) {
+      FlashMessages.sendError(errors);
+      return;
+    } else {
+      Meteor.call('createServerUser', data, function(error, result) {
+        if (error) {
+          FlashMessages.sendError("Error in creating user");
+        } else {
 
-
-
-
-      Template.newUser.events({
-        'click .createUser': function(evt, template) {
-          evt.preventDefault();
-          var errors = [];
-
-          data = {
-            email: template.find("input[name=email]").value,
-            password: template.find("input[name=password]").value,
-            profile: {
-              firstName: template.find("input[name=firstName]").value,
-              surname: template.find("input[name=surname]").value,
-              role: template.find("input[name=role]").checked
-            }
-          };
-
-        var wibble = $('.newUser').data('bootstrapValidator');
-        console.log("wibble is");
-        console.log(wibble);
-        console.log("data is");
-        console.log(wibble.data);
-        wibble.validate();
-        if (!wibble.isValid()) {
-          return
-        };
-
-
-
-          if (data.role) {
-            data.role = "admin";
-          } else {
-            data.role = "";
-          }
-
-          if (errors.length > 0) {
-            FlashMessages.sendError(errors);
-            return;
-          } else {
-            Meteor.call('createServerUser', data, function(error, result) {
-              if (error) {
-                FlashMessages.sendError("Error in creating user");
-              } else {
-
-                console.log("calling create review with result");
-                console.log(result);
-                createReview(result);
-              }
-            });
-          }
-
+          createReview(result);
           FlashMessages.sendInfo("User Created");
-
-
+          Router.go('users');
         }
       });
+    }
 
 
-  Template.newUser.rendered = function() {
-    $('.newUser').bootstrapValidator(validateUser)
+
+
   }
+});
+
+
+Template.newUser.rendered = function() {
+  $('.newUser').bootstrapValidator(validateUser)
+}

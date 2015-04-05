@@ -93,13 +93,13 @@ Template.newAppraisalForm.events({
     var id;
 
     if (this.mode == "new") {
-      id = createAppraisalForm(evt, template, "created");
+      id = createAppraisalForm(evt, template, "published");
     } else {
 
       id = this.appraisalForm._id;
 
 
-      updateAppraisalForm(evt, template, id, "created");
+      updateAppraisalForm(evt, template, id, "published");
     }
 
 
@@ -122,6 +122,8 @@ Template.newAppraisalForm.events({
       });
 
     })
+
+    Router.go('listAppraisals');
   },
 
   'click .standard': function(evt, template) {
@@ -176,7 +178,6 @@ Template.newAppraisalForm.created = function() {
   tempQuestions.remove({});
 
   var questionNo = 1;
-  console.log("new appraisal form called");
 
   if (this.data.mode == "new") {
     console.log("processing a new form");

@@ -91,6 +91,8 @@ Template.editAppraisalForm.events({
       });
 
     })
+
+    Router.go('listAppraisals');
   }
 
 });
